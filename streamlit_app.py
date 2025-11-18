@@ -117,10 +117,10 @@ with st.sidebar:
         st.error(f"Lỗi khi tải model: {e}")
         st.error("Hãy thử tải lại trang")
         st.stop()
-    
+
+st.tilte("Image Classification - Compared 5 Models")
 upload_im = st.file_uploader("Chọn ảnh của bạn", type=["png", "jpg", "jpeg"])
 if upload_im is not None:
-    st.tilte("Image Classification - Compared 5 Models")
     st.write("Upload imgae")
     img_original = np.asarray(bytearray(upload_im.read()), dtype = np.uint8)
     img_original = cv2.cvtColor(cv2.imdecode(img_original, cv2.IMREAD_COLOR), cv2.COLOR_BGR2RGB)
