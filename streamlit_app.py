@@ -121,7 +121,6 @@ with st.sidebar:
 st.title("Image Classification - Compared 5 Models")
 upload_im = st.file_uploader("Chọn ảnh của bạn", type=["png", "jpg", "jpeg"])
 if upload_im is not None:
-    st.write("Upload imgae")
     img_original = np.asarray(bytearray(upload_im.read()), dtype = np.uint8)
     img_original = cv2.cvtColor(cv2.imdecode(img_original, cv2.IMREAD_COLOR), cv2.COLOR_BGR2RGB)
     img_pil = Image.fromarray(img_original)
