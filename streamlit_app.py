@@ -177,6 +177,15 @@ if upload_im is not None:
     st.header("Confidence Comparison Among Models")
     st.subheader("Model Confidence Comparison")
     st.bar_chart(df, x = 'Model', y = 'Confidence(%)', sort = False, color = 'Model')
+    idx_max = df['Confidence(%)'].idxmax()
+    model_name = df['Model'][idx_max]
+    prediction = df['Predicted class'][idx_max]
+    confidence = df['Confidence(%)'][idx_max]
+    st.success(f"🏆 Best Prediction: {model_name} → {prediction} ({confidence}%)")
     st.header("Inference Time Comparison Among Models")
     st.subheader("Model Inference Time Comparison")
     st.bar_chart(df, x = 'Model', y = 'Inference time(s)', sort = False, color = 'Model')
+    idx_min = df['Inference time(s)'].idxmin()
+    model_name = df['Model'][idx_min]
+    inference_time = df['Inference time(s)'][idx_min]
+    st.success(f"🏆 Best Prediction: {model_name} → ({inference_time}%)")
