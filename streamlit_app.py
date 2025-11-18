@@ -99,7 +99,7 @@ def load_all_models():
         num_classes = 6
     )
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    vit_model.load_state_dict(torch.load('vit_weights.pth'), map_location = device)
+    vit_model.load_state_dict(torch.load('vit_weights.pth', map_location = device))
     vit_model.to(device)
     vit_model.eval()
     
