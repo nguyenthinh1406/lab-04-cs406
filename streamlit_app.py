@@ -109,16 +109,20 @@ batch_size = 32
 input_shape = (224, 224, 3)
 num_classes = 6
 
-try:
-    model_vgg, model_resnet, model_mobile, model_efficient, model_vit = load_all_models()
-    st.success("Đã tải tất cả 5 model!")
-except Exception as e:
-    st.error(f"Lỗi khi tải model: {e}")
-    st.stop()
-
-upload_im = st.file_uploader("Chọn ảnh của bạn", type=["png", "jpg", "jpeg"])
+with st.sidebar:
+    try:
+        model_vgg, model_resnet, model_mobile, model_efficient, model_vit = load_all_models()
+        st.success("Đã tải tất cả 5 model!")
+    except Exception as e:
+        st.error(f"Lỗi khi tải model: {e}")
+        st.error("Hãy thử tải lại trang")
+        st.stop()
+    
+    upload_im = st.file_uploader("Chọn ảnh của bạn", type=["png", "jpg", "jpeg"])
 
 if upload_im is not None:
+    st.tilte("Image Classification - Compared 5 Models")
+    st.write("Upload imgae")
     img_original = np.asarray(bytearray(upload_im.read()), dtype = np.uint8)
     img_original = cv2.cvtColor(cv2.imdecode(img_original, cv2.IMREAD_COLOR), cv2.COLOR_BGR2RGB)
     img_pil = Image.fromarray(img_original)
@@ -172,5 +176,9 @@ if upload_im is not None:
     })
 
     st.dataframe(df)
-    st.bar_chart(df, x = 'Model', y = 'Confidence(%)')
-    st.bar_chart(df, x = 'Model', y = 'Inference time(s)')
+    st.header("Confidence Comparison Among Models")
+    st.subheader("Model Confidence Comparison")
+    st.bar_chart(df, x = 'Model', y = 'Confidence(%)', sort = False, color = 'Model')
+    st.header("Inference Time Comparison Among Models")
+    st.subheader("Model Inference Time Comparison")
+    st.bar_chart(df, x = 'Model', y = 'Inference time(s)', sort = False, color = 'Model')
