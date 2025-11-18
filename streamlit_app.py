@@ -101,6 +101,7 @@ def load_all_models():
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     vit_model.load_state_dict(torch.load('vit_weights.pth'), map_location = device)
     vit_model.to(device)
+    vit_model.eval()
     
     return vgg_model, resnet_model, mobile_model, efficient_model, vit_model
 
@@ -125,7 +126,6 @@ if upload_im is not None:
 
     model_list = [model_vgg, model_resnet, model_mobile, model_efficient, model_vit]
     model_names = ['VGG19', 'ResNet50', 'MobileNetV2', 'EfficientNetB0', 'ViTNetB16']
-    preprocess_funcs = [vgg_preprocessor, resnet_preprocessor, mobile_preprocessor, efficient_preprocessor, None]
     class_name = ['buildings', 'forest', 'glacier', 'mountain', 'sea', 'street']
 
     predicted_class = []
