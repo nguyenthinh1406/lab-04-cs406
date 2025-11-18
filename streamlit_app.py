@@ -118,7 +118,7 @@ with st.sidebar:
         st.error("Hãy thử tải lại trang")
         st.stop()
 
-st.tilte("Image Classification - Compared 5 Models")
+st.title("Image Classification - Compared 5 Models")
 upload_im = st.file_uploader("Chọn ảnh của bạn", type=["png", "jpg", "jpeg"])
 if upload_im is not None:
     st.write("Upload imgae")
