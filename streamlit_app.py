@@ -32,7 +32,7 @@ augment = keras.Sequential([
 vit_transform = T.Compose([
     T.Resize((224, 224)),
     T.ToTensor(),
-    T.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
+    T.Normalize(mean = [0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
 ])
 
 def base_model(model, preprocessor, input_shape, num_classes):
@@ -99,9 +99,9 @@ def load_all_models():
         num_classes = 6
     )
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    vit_model.load_state_dict(torch.load('vit_weights.pth'), map_location = device)
     vit_model.to(device)
-    vit_model.load_state_dict(torch.load('vit_weights.pth'))
-
+    
     return vgg_model, resnet_model, mobile_model, efficient_model, vit_model
 
 batch_size = 32
